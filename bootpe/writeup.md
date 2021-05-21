@@ -3,10 +3,15 @@ bootloaders are, I decided to try and make a bootloader/executable polyglot
 
 ## ELFs are hard to play
 
-My first thought was to create an ELF file that was also a valid bootloader. Unfortunately, the ELF
+~~My first thought was to create an ELF file that was also a valid bootloader. Unfortunately, the ELF
 header is appeared to be a rather daunting task, so I decided to try a different format. I found
 Microsoft PE to be easier to work with (though I would like to come back to ELF someday and see if
-I can make it work)
+I can make it work)~~
+
+I managed to get an ELF working as well. The ELF magic (0x7f, "ELF") results in an x86 jump to the
+4th byte of p_filesz. By fixing up p_filesz and p_memsz, we can turn that into a second jmp
+instruction that goes to our bootloader. This is fine, since p_filesz just needs to be large enough
+to hold the binary, but can be larger, and p_memsz needs to be >= p_filesz
 
 ## Building a Halfling
 
