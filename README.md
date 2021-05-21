@@ -15,8 +15,10 @@ nasm -f bin -o bootpe.exe bootpe.asm
 #### Run:
 
 ```
-qemu-system-x86_64 -fda bootpe.exe -curses
+qemu-system-x86_64 bootpe.exe
 ```
+
+(If you don't have a video device, e.g. if you're remoting into a server, append the `-curses` flag)
 
 Or just run it as you normally would on Windows
 
@@ -33,8 +35,10 @@ nasm -f bin -o bootelf bootelf.asm
 #### Run:
 
 ```
-qemu-system-x86_64 -fda bootelf -curses
+qemu-system-x86_64 bootelf
 ```
+
+(If you don't have a video device, e.g. if you're remoting into a server, append the `-curses` flag)
 
 Or just run it as you normally would on Linux
 
