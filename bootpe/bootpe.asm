@@ -43,10 +43,12 @@ mzhdr:
     times 10 dw 0                 ; e_res2 UNUSED
     dd pesig                      ; e_lfanew
 
+bootbase equ 0x7c00
+
 boot:
-  ;mov si, msg ; Move  'msg' into si to prepare for the BIOS interrupt call
-  db 0xbe, 0x50, 0x7c ; Need to hardcode this because it's a 16-bit address
-                      ; Can't use org 0x7c00 becaue that would set all offsets
+  mov si, (bootbase + msg - $$)   ; Move  'msg' into si to prepare for the BIOS interrupt call
+                                  ; Note: we need do some address fixing here since mov needs
+                                  ; an absolute address:w
   mov ah, 0x0e ; BIOS interrupt call to write character
 
 .loop:
